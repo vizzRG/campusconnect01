@@ -25,7 +25,7 @@ connectDB();
 // Middleware
 app.use(
   cors({
-    origin: "https://campusconnect01.vercel.app",
+    origin: "*",
   }),
 );
 app.use(express.json());
