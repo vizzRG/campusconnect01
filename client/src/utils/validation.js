@@ -15,3 +15,8 @@ export const validateUsername = (username) => {
     /^[a-zA-Z0-9_]+$/.test(username)
   );
 };
+
+export const isCollegeEmail = (email) => {
+  const collegeDomains = [".edu", ".ac.in", ".edu.in", ".ac.uk", ".edu.au"];
+  return collegeDomains.some((domain) => email.toLowerCase().endsWith(domain));
+};

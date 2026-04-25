@@ -11,6 +11,18 @@ const generateToken = (id) => {
 export const register = async (req, res) => {
   try {
     const { username, email, password, college, year, branch } = req.body;
+    
+    // College email validation
+    const collegeDomains = [".edu", ".ac.in", ".edu.in", ".ac.uk", ".edu.au"];
+    const isCollegeEmail = collegeDomains.some((domain) =>
+      email.toLowerCase().endsWith(domain)
+    );
+
+    if (!isCollegeEmail) {
+      return res.status(400).json({
+        message: "Only college email IDs are allowed for registration",
+      });
+    }
 
     const userExists = await User.findOne({ $or: [{ email }, { username }] });
     if (userExists) {

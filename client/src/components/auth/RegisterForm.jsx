@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import Input from "../common/Input.jsx";
 import Button from "../common/Button.jsx";
 import { useAuth } from "../../hooks/useAuth.js";
+import { isCollegeEmail } from "../../utils/validation.js";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -48,6 +49,8 @@ const RegisterForm = () => {
       newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Invalid email format";
+    } else if (!isCollegeEmail(formData.email)) {
+      newErrors.email = "Please use your college email ID (e.g., .edu, .ac.in)";
     }
     if (!formData.password) {
       newErrors.password = "Password is required";
